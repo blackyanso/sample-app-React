@@ -23,32 +23,25 @@ const TopCamera = () => {
   }
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <View>
-          <View style={styles.cameraContainer}>
-            <RNCamera
-              ref={cameraRef}
-              style={styles.cameraPreview}
-              type={RNCamera.Constants.Type.back}
-              flashMode={RNCamera.Constants.FlashMode.on}
-              androidCameraPermissionOptions={{
-                title: 'Permission to use camera',
-                message: 'We need your permission to use your camera',
-                buttonPositive: 'Ok',
-                buttonNegative: 'Cancel'
-              }}
-              onGoogleVisionBarcodesDetected={({barcodes}) => {
-                console.log(barcodes)
-              }}
-              ratio="1:1"
-            />
-            <Button onPress={takePicture} title="撮影" />
-          </View>
-        </View>
-      </SafeAreaView>
-    </>
+    <View>
+      <RNCamera
+        ref={cameraRef}
+        style={styles.cameraPreview}
+        type={RNCamera.Constants.Type.back}
+        flashMode={RNCamera.Constants.FlashMode.on}
+        androidCameraPermissionOptions={{
+          title: 'Permission to use camera',
+          message: 'We need your permission to use your camera',
+          buttonPositive: 'Ok',
+          buttonNegative: 'Cancel'
+        }}
+        onGoogleVisionBarcodesDetected={({barcodes}) => {
+          console.log(barcodes)
+        }}
+        ratio="1:1"
+      />
+      <Button onPress={takePicture} title="撮影" />
+    </View>
   )
 }
 
