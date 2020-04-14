@@ -1,18 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import {Text, View, Image, StyleSheet} from 'react-native'
+import {Link} from 'react-router-native'
 import axios from 'axios'
 
 export default function Gallery() {
   const styles = StyleSheet.create({
     gallery: {
-      flex: 3,
+      flex: 1,
       flexDirection: 'row',
       flexWrap: 'wrap',
-      alignItems: 'stretch'
+      justifyContent: 'space-between'
     },
     image: {
-      width: '100%',
-      height: '100%'
+      width: 100,
+      height: 100
     }
   })
 
@@ -24,23 +25,33 @@ export default function Gallery() {
     setItems(result.data.items)
   }
 
+  // asynchronous tasks in a useEffect cleanup function
   useEffect(() => {
     init()
   })
 
   return (
-    <View style={styles.gallery}>
-      {items.map((item, index) => {
-        return (
-          <Image
-            style={styles.image}
-            key={index}
-            source={{
-              uri: item.thumbnail
-            }}
-          />
-        )
-      })}
+    <View>
+      <Text>Gallery</Text>
+      <View style={styles.gallery} accessible={true}>
+        {items.map((item, index) => {
+          return (
+            <Link
+              to={{
+                pathname: '/GalleryPreview',
+                state: {url: item.previewImage}
+              }}>
+              <Image
+                key={index}
+                style={styles.image}
+                source={{
+                  uri: item.thumbnail
+                }}
+              />
+            </Link>
+          )
+        })}
+      </View>
     </View>
   )
 }
