@@ -1,22 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import {Text, View, Image, StyleSheet} from 'react-native'
-import {Link} from 'react-router-native'
+import {Text, ScrollView, View, StyleSheet} from 'react-native'
 import axios from 'axios'
 
-export default function Gallery() {
-  const styles = StyleSheet.create({
-    gallery: {
-      flex: 1,
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-between'
-    },
-    image: {
-      width: 100,
-      height: 100
-    }
-  })
+import GalleryItem from './GalleryItem'
 
+export default function Gallery() {
   const [items, setItems] = useState([])
 
   async function init() {
@@ -25,33 +13,29 @@ export default function Gallery() {
     setItems(result.data.items)
   }
 
-  // asynchronous tasks in a useEffect cleanup function
   useEffect(() => {
     init()
-  })
+  }, [])
 
   return (
-    <View>
+    <>
       <Text>Gallery</Text>
-      <View style={styles.gallery} accessible={true}>
-        {items.map((item, index) => {
-          return (
-            <Link
-              key={index}
-              to={{
-                pathname: '/GalleryPreview',
-                state: {url: item.previewImage}
-              }}>
-              <Image
-                style={styles.image}
-                source={{
-                  uri: item.thumbnail
-                }}
-              />
-            </Link>
-          )
-        })}
-      </View>
-    </View>
+      <ScrollView>
+        <View style={styles.gallery} accessible={true}>
+          {items.map((item, index) => {
+            return <GalleryItem value={item} key={index} />
+          })}
+        </View>
+      </ScrollView>
+    </>
   )
 }
+
+const styles = StyleSheet.create({
+  gallery: {
+    flex: 3,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
+  }
+})
