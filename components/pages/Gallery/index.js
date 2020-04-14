@@ -37,12 +37,12 @@ export default function Gallery() {
         {items.map((item, index) => {
           return (
             <Link
+              key={index}
               to={{
                 pathname: '/GalleryPreview',
                 state: {url: item.previewImage}
               }}>
               <Image
-                key={index}
                 style={styles.image}
                 source={{
                   uri: item.thumbnail
