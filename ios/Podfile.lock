@@ -346,19 +346,21 @@ DEPENDENCIES:
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  trunk:
-    - boost-for-react-native
+  https://cdn.cocoapods.org/:
     - CocoaAsyncSocket
     - CocoaLibEvent
     - Flipper
-    - Flipper-DoubleConversion
-    - Flipper-Folly
-    - Flipper-Glog
     - Flipper-PeerTalk
     - Flipper-RSocket
     - FlipperKit
     - OpenSSL-Universal
     - YogaKit
+  https://github.com/CocoaPods/Specs.git:
+    - boost-for-react-native
+    - Flipper-DoubleConversion
+    - Flipper-Folly
+    - Flipper-Glog
+    - FlipperKit
 
 EXTERNAL SOURCES:
   DoubleConversion:
