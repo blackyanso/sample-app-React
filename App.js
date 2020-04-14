@@ -11,30 +11,29 @@ export default function HelloWorldApp() {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <NativeRouter>
-          <View style={styles.debug}>
-            <Link to="/">
-              <Text>TopCamera</Text>
-            </Link>
-            <Link to="/ChooseFilter">
-              <Text>ChooseFilter</Text>
-            </Link>
-            <Link to="/Gallery">
-              <Text>Gallery</Text>
-            </Link>
-            <Link to="/GalleryPreview">
-              <Text>GalleryPreview</Text>
-            </Link>
-          </View>
-          <View style={styles.container}>
-            <Route exact path="/" component={TopCamera} />
-            <Route path="/ChooseFilter" component={ChooseFilter} />
-            <Route path="/Gallery" component={Gallery} />
-            <Route path="/GalleryPreview" component={GalleryPreview} />
-          </View>
-        </NativeRouter>
-      </SafeAreaView>
+      <SafeAreaView />
+      <NativeRouter>
+        <View style={styles.debug}>
+          <Link to="/">
+            <Text>TopCamera</Text>
+          </Link>
+          <Link to="/ChooseFilter">
+            <Text>ChooseFilter</Text>
+          </Link>
+          <Link to="/Gallery">
+            <Text>Gallery</Text>
+          </Link>
+          <Link to="/GalleryPreview">
+            <Text>GalleryPreview</Text>
+          </Link>
+        </View>
+        <View style={styles.container}>
+          <Route exact path="/" component={TopCamera} />
+          <Route path="/ChooseFilter" component={ChooseFilter} />
+          <Route path="/Gallery" component={Gallery} />
+          <Route path="/GalleryPreview" component={GalleryPreview} />
+        </View>
+      </NativeRouter>
     </>
   )
 }
