@@ -14,8 +14,8 @@ export default function HelloWorldApp() {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView />
-      <DebugNavi />
       <NativeRouter>
+        <DebugNavi />
         <View style={styles.container}>
           <Route exact path="/" component={TopCamera} />
           <Route path="/ChooseFilter" component={ChooseFilter} />
