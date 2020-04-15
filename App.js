@@ -13,17 +13,16 @@ export default function HelloWorldApp() {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <DebugNavi />
-        <NativeRouter>
-          <View style={styles.container}>
-            <Route exact path="/" component={TopCamera} />
-            <Route path="/ChooseFilter" component={ChooseFilter} />
-            <Route path="/Gallery" component={Gallery} />
-            <Route path="/GalleryPreview" component={GalleryPreview} />
-          </View>
-        </NativeRouter>
-      </SafeAreaView>
+      <SafeAreaView />
+      <DebugNavi />
+      <NativeRouter>
+        <View style={styles.container}>
+          <Route exact path="/" component={TopCamera} />
+          <Route path="/ChooseFilter" component={ChooseFilter} />
+          <Route path="/Gallery" component={Gallery} />
+          <Route path="/GalleryPreview" component={GalleryPreview} />
+        </View>
+      </NativeRouter>
     </>
   )
 }
