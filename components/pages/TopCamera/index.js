@@ -1,9 +1,9 @@
 import React, {useRef} from 'react'
-import {Button, SafeAreaView, StatusBar, StyleSheet, View} from 'react-native'
+import {Button, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
 
-const TopCamera = () => {
+const TopCamera = props => {
   const cameraRef = useRef(null)
 
   const takePicture = async () => {
@@ -19,7 +19,16 @@ const TopCamera = () => {
     if (cameraRef && cameraRef.current) {
       const shotData = await cameraRef.current.takePictureAsync(options)
       console.log('base64 log:', shotData.base64)
+      gotoFilter(shotData.base64)
     }
+  }
+
+  const gotoFilter = base64 => {
+    // Base64URL Encode
+    // https://ja.wikipedia.org/wiki/Base64
+    // https://akataworks.hatenadiary.jp/entry/2018/02/19/123524
+    const replaced = base64.replace(/\+/g, '-').replace(/\//g, '_')
+    props.history.push('/ChooseFilter/' + replaced)
   }
 
   return (

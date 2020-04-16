@@ -1,6 +1,6 @@
 import 'react-native-get-random-values'
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {StyleSheet, Text, View, ScrollView} from 'react-native'
 import {WebView} from 'react-native-webview'
 const html = `
 <!DOCTYPE html>
@@ -14,16 +14,21 @@ const html = `
 </html>
 `
 
-export default function ChooseFilter() {
+export default function ChooseFilter({match}) {
   return (
-    <View>
+    <ScrollView>
       <Text>ChooseFilter</Text>
       <View style={styles.wrap}>
         <WebView scalesPageToFit={false} source={{html}} />
       </View>
       <Text>ChooseFilter</Text>
-    </View>
+      <Text>Base64: {decodeBase64(match.params.base64)}</Text>
+    </ScrollView>
   )
+}
+
+const decodeBase64 = base64 => {
+  return base64.replace(/-/g, '+').replace(/_/g, '/')
 }
 
 const styles = StyleSheet.create({
