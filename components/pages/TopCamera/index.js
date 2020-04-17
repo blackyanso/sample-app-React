@@ -13,8 +13,11 @@ const TopCamera = props => {
     const options = {
       quality: 0.95,
       base64: true,
-      width: 320,
-      height: 320
+      width: 1024,
+      height: 1024,
+      exif: false,
+      fixOrientation: true, // Android用
+      forceUpOrientation: true // iOS用
     }
     if (cameraRef && cameraRef.current) {
       const shotData = await cameraRef.current.takePictureAsync(options)
