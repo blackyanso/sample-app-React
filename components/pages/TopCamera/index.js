@@ -12,7 +12,6 @@ const TopCamera = () => {
     // https://github.com/react-native-community/react-native-camera/blob/master/docs/RNCamera.md
     // https://qiita.com/arakappa/items/edd70ab9102a8566c145
     const options = {
-      quality: 0.95,
       base64: true,
       width: 320,
       height: 320
@@ -53,7 +52,7 @@ const TopCamera = () => {
   }
 
   return (
-    <View>
+    <View style={styles.padding}>
       <RNCamera
         ref={cameraRef}
         style={styles.cameraPreview}
@@ -64,9 +63,6 @@ const TopCamera = () => {
           message: 'We need your permission to use your camera',
           buttonPositive: 'Ok',
           buttonNegative: 'Cancel'
-        }}
-        onGoogleVisionBarcodesDetected={({barcodes}) => {
-          console.log(barcodes)
         }}
         ratio="1:1"
       />
@@ -82,7 +78,7 @@ const TopCamera = () => {
 
 const TakePictureBtn = ({action}) => {
   return (
-    <View style={styles.margin}>
+    <View style={styles.marginVertical}>
       <Button onPress={action} title="撮影" />
     </View>
   )
@@ -90,7 +86,7 @@ const TakePictureBtn = ({action}) => {
 
 const StartRecBtn = ({action}) => {
   return (
-    <View style={styles.margin}>
+    <View style={styles.marginVertical}>
       <Button onPress={action} title="録画開始" />
     </View>
   )
@@ -98,7 +94,7 @@ const StartRecBtn = ({action}) => {
 
 const StopRecBtn = ({action}) => {
   return (
-    <View style={styles.margin}>
+    <View style={styles.marginVertical}>
       <Button onPress={action} title="録画終了" />
     </View>
   )
@@ -109,10 +105,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white
   },
   padding: {
-    padding: 10
+    padding: 20
   },
-  margin: {
-    margin: 10
+  marginVertical: {
+    marginTop: 10,
+    marginBottom: 10
   },
   waringText: {
     fontSize: 24,
