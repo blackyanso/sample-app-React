@@ -15,8 +15,8 @@ export default function({match}) {
 
   const styles = StyleSheet.create({
     wrap: {
-      width: 0,
-      height: 0
+      width: 320,
+      height: 320
     },
     image: {
       width: '100%',
@@ -77,7 +77,8 @@ export default function({match}) {
       <View style={styles.wrap}>
         <WebView
           scalesPageToFit={false}
-          source={{html}}
+          // source={{html}}
+          source={{uri: 'https://uki213.github.io/sample-app-Pwa/#/'}}
           onMessage={filtered}
           mixedContentMode={'always'}
         />
