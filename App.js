@@ -1,6 +1,8 @@
 import React from 'react'
-import {StyleSheet, Text, View, StatusBar, SafeAreaView} from 'react-native'
-import {NativeRouter, Route, Link} from 'react-router-native'
+import {StyleSheet, View, StatusBar, SafeAreaView} from 'react-native'
+import {NativeRouter, Route} from 'react-router-native'
+
+import DebugNavi from './components/commons/DebugNavi'
 
 import TopCamera from './components/pages/TopCamera/index'
 import ChooseFilter from './components/pages/ChooseFilter/index'
@@ -13,20 +15,7 @@ export default function HelloWorldApp() {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView />
       <NativeRouter>
-        <View style={styles.debug}>
-          <Link to="/">
-            <Text>TopCamera</Text>
-          </Link>
-          <Link to="/ChooseFilter">
-            <Text>ChooseFilter</Text>
-          </Link>
-          <Link to="/Gallery">
-            <Text>Gallery</Text>
-          </Link>
-          <Link to="/GalleryPreview">
-            <Text>GalleryPreview</Text>
-          </Link>
-        </View>
+        <DebugNavi />
         <View style={styles.container}>
           <Route exact path="/" component={TopCamera} />
           <Route path="/ChooseFilter" component={ChooseFilter} />
@@ -39,10 +28,6 @@ export default function HelloWorldApp() {
 }
 
 const styles = StyleSheet.create({
-  debug: {
-    display: 'flex',
-    backgroundColor: '#f0f0f0'
-  },
   container: {
     flex: 1,
     padding: 20,
