@@ -1,9 +1,10 @@
-import React, {useRef} from 'react'
-import {Button, SafeAreaView, StatusBar, StyleSheet, View} from 'react-native'
+import React, {useRef, useState} from 'react'
+import {Button, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
 
 const TopCamera = () => {
+  const [isRecording, toggleRecording] = useState(false)
   const cameraRef = useRef(null)
 
   const takePicture = async () => {
@@ -20,6 +21,35 @@ const TopCamera = () => {
       const shotData = await cameraRef.current.takePictureAsync(options)
       console.log('base64 log:', shotData.base64)
     }
+  }
+
+  const takeVideo = async () => {
+    const options = {
+      mute: false,
+      maxDuration: 5,
+      quality: RNCamera.Constants.VideoQuality['288p']
+    }
+
+    if (cameraRef && cameraRef.current && !isRecording) {
+      try {
+        const promise = cameraRef && cameraRef.current.recordAsync(options)
+
+        if (promise) {
+          console.log('start takeVideo')
+          toggleRecording(true)
+          const data = await promise
+          console.log('takeVideo', data)
+          toggleRecording(false)
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
+
+  const stopVideo = async () => {
+    console.log('stop takeVideo')
+    await cameraRef.current.stopRecording()
   }
 
   return (
@@ -40,7 +70,36 @@ const TopCamera = () => {
         }}
         ratio="1:1"
       />
-      <Button onPress={takePicture} title="撮影" />
+      <TakePictureBtn action={takePicture} />
+      {isRecording ? (
+        <StopRecBtn action={stopVideo} />
+      ) : (
+        <StartRecBtn action={takeVideo} />
+      )}
+    </View>
+  )
+}
+
+const TakePictureBtn = ({action}) => {
+  return (
+    <View style={styles.margin}>
+      <Button onPress={action} title="撮影" />
+    </View>
+  )
+}
+
+const StartRecBtn = ({action}) => {
+  return (
+    <View style={styles.margin}>
+      <Button onPress={action} title="録画開始" />
+    </View>
+  )
+}
+
+const StopRecBtn = ({action}) => {
+  return (
+    <View style={styles.margin}>
+      <Button onPress={action} title="録画終了" />
     </View>
   )
 }
@@ -51,6 +110,9 @@ const styles = StyleSheet.create({
   },
   padding: {
     padding: 10
+  },
+  margin: {
+    margin: 10
   },
   waringText: {
     fontSize: 24,
