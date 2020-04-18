@@ -3,7 +3,7 @@ import {Button, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
 
-const TopCamera = () => {
+const TopCamera = props => {
   const [isRecording, toggleRecording] = useState(false)
   const cameraRef = useRef(null)
 
@@ -37,8 +37,12 @@ const TopCamera = () => {
           console.log('start takeVideo')
           toggleRecording(true)
           const data = await promise
-          console.log('takeVideo', data)
+          console.log('takeVideo Path:', data.uri)
           toggleRecording(false)
+          console.log('encodedPath:' + encodeURIComponent(data.uri))
+          props.history.push(
+            '/ChooseVideoFilter/' + encodeURIComponent(data.uri)
+          )
         }
       } catch (e) {
         console.error(e)
