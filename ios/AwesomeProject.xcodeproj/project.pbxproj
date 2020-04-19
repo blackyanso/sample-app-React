@@ -645,9 +645,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = masanao.imai.reactnative;
+				PRODUCT_BUNDLE_IDENTIFIER = masanao.imai.flutter;
 				PRODUCT_NAME = AwesomeProject;
-				PROVISIONING_PROFILE_SPECIFIER = development.reactnative.learning;
+				PROVISIONING_PROFILE_SPECIFIER = development.flutter.learning;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -670,9 +670,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = masanao.imai.reactnative;
+				PRODUCT_BUNDLE_IDENTIFIER = masanao.imai.flutter;
 				PRODUCT_NAME = AwesomeProject;
-				PROVISIONING_PROFILE_SPECIFIER = development.reactnative.learning;
+				PROVISIONING_PROFILE_SPECIFIER = development.flutter.learning;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
