@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useRef, useState} from 'react'
+=======
+import React, {useRef} from 'react'
+>>>>>>> master
 import {Button, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
@@ -13,14 +17,15 @@ const TopCamera = props => {
     // https://qiita.com/arakappa/items/edd70ab9102a8566c145
     const options = {
       base64: true,
-      width: 320,
-      height: 320,
+      width: 1024,
+      height: 1024,
       exif: false,
       fixOrientation: true, // Android用
       forceUpOrientation: true // iOS用
     }
     if (cameraRef && cameraRef.current) {
       const shotData = await cameraRef.current.takePictureAsync(options)
+      console.log('base64 log:', shotData.base64)
       gotoFilter(shotData.base64)
     }
   }
