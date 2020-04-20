@@ -47,6 +47,7 @@ export default function({match}) {
   `
 
   function decodeBase64(base64) {
+    console.log('decodeBase64:')
     return base64.replace(/-/g, '+').replace(/_/g, '/')
   }
 

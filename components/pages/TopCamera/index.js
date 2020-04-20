@@ -1,9 +1,10 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import {Button, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
 
 const TopCamera = props => {
+  const [isRecording, toggleRecording] = useState(false)
   const cameraRef = useRef(null)
 
   const takePicture = async () => {
@@ -11,7 +12,6 @@ const TopCamera = props => {
     // https://github.com/react-native-community/react-native-camera/blob/master/docs/RNCamera.md
     // https://qiita.com/arakappa/items/edd70ab9102a8566c145
     const options = {
-      quality: 0.95,
       base64: true,
       width: 1024,
       height: 1024,
@@ -26,16 +26,50 @@ const TopCamera = props => {
     }
   }
 
+  const takeVideo = async () => {
+    const options = {
+      mute: false,
+      maxDuration: 5,
+      quality: RNCamera.Constants.VideoQuality['288p']
+    }
+
+    if (cameraRef && cameraRef.current && !isRecording) {
+      try {
+        const promise = cameraRef && cameraRef.current.recordAsync(options)
+
+        if (promise) {
+          console.log('start takeVideo')
+          toggleRecording(true)
+          const data = await promise
+          console.log('takeVideo Path:', data.uri)
+          toggleRecording(false)
+          console.log('encodedPath:' + encodeURIComponent(data.uri))
+          props.history.push(
+            '/ChooseVideoFilter/' + encodeURIComponent(data.uri)
+          )
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
+
+  const stopVideo = async () => {
+    console.log('stop takeVideo')
+    await cameraRef.current.stopRecording()
+  }
+
   const gotoFilter = base64 => {
     // Base64URL Encode
     // https://ja.wikipedia.org/wiki/Base64
     // https://akataworks.hatenadiary.jp/entry/2018/02/19/123524
     const replaced = base64.replace(/\+/g, '-').replace(/\//g, '_')
+    console.log('go to filter from top camera')
     props.history.push('/ChooseFilter/' + replaced)
   }
 
   return (
-    <View>
+    <View style={styles.padding}>
       <RNCamera
         ref={cameraRef}
         style={styles.cameraPreview}
@@ -47,12 +81,38 @@ const TopCamera = props => {
           buttonPositive: 'Ok',
           buttonNegative: 'Cancel'
         }}
-        onGoogleVisionBarcodesDetected={({barcodes}) => {
-          console.log(barcodes)
-        }}
         ratio="1:1"
       />
-      <Button onPress={takePicture} title="撮影" />
+      <TakePictureBtn action={takePicture} />
+      {isRecording ? (
+        <StopRecBtn action={stopVideo} />
+      ) : (
+        <StartRecBtn action={takeVideo} />
+      )}
+    </View>
+  )
+}
+
+const TakePictureBtn = ({action}) => {
+  return (
+    <View style={styles.marginVertical}>
+      <Button onPress={action} title="撮影" />
+    </View>
+  )
+}
+
+const StartRecBtn = ({action}) => {
+  return (
+    <View style={styles.marginVertical}>
+      <Button onPress={action} title="録画開始" />
+    </View>
+  )
+}
+
+const StopRecBtn = ({action}) => {
+  return (
+    <View style={styles.marginVertical}>
+      <Button onPress={action} title="録画終了" />
     </View>
   )
 }
@@ -62,7 +122,11 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white
   },
   padding: {
-    padding: 10
+    padding: 20
+  },
+  marginVertical: {
+    marginTop: 10,
+    marginBottom: 10
   },
   waringText: {
     fontSize: 24,

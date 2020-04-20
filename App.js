@@ -4,6 +4,7 @@ import {NativeRouter, Route, Link} from 'react-router-native'
 
 import TopCamera from './components/pages/TopCamera/index'
 import ChooseFilter from './components/pages/ChooseFilter/index'
+import ChooseVideoFilter from './components/pages/ChooseVideoFilter/index'
 import Gallery from './components/pages/Gallery/index'
 import GalleryPreview from './components/pages/GalleryPreview/index'
 
@@ -29,6 +30,10 @@ export default function HelloWorldApp() {
         </View>
         <View style={styles.container}>
           <Route exact path="/" component={TopCamera} />
+          <Route
+            path="/ChooseVideoFilter/:filePath"
+            component={ChooseVideoFilter}
+          />
           <Route path="/ChooseFilter/:base64" component={ChooseFilter} />
           <Route path="/Gallery" component={Gallery} />
           <Route path="/GalleryPreview" component={GalleryPreview} />
