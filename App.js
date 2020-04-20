@@ -30,7 +30,6 @@ export default function HelloWorldApp() {
         </View>
         <View style={styles.container}>
           <Route exact path="/" component={TopCamera} />
-          <Route path="/ChooseFilter" component={ChooseFilter} />
           <Route
             path="/ChooseVideoFilter/:filePath"
             component={ChooseVideoFilter}
