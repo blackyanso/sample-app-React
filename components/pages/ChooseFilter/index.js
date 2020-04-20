@@ -2,6 +2,7 @@ import 'react-native-get-random-values'
 import React, {useState} from 'react'
 import {StyleSheet, Switch, Text, View, Image, ScrollView} from 'react-native'
 import {WebView} from 'react-native-webview'
+import filterous from './filterous2.js'
 
 export default function({match}) {
   const imageBase64 =
@@ -12,8 +13,8 @@ export default function({match}) {
 
   const styles = StyleSheet.create({
     wrap: {
-      width: 320,
-      height: 320
+      width: 0,
+      height: 0
     },
     image: {
       width: '100%',
@@ -22,8 +23,8 @@ export default function({match}) {
   })
 
   const html = /*html*/ `
-    <script src="https://cdn.rawgit.com/girliemac/filterous-2/1fc15582/demo-browser/filterous2.min.js"></script>
     <script>
+      ${filterous}
       const baseData = '${imageBase64}'
 
       function filter() {
@@ -33,7 +34,7 @@ export default function({match}) {
         baseImage.src = baseData
 
         resultImage.onload = () => {
-        window.ReactNativeWebView.postMessage(resultImage.src)
+          window.ReactNativeWebView.postMessage(resultImage.src)
         }
 
         filterous
@@ -41,7 +42,6 @@ export default function({match}) {
           .applyInstaFilter(filterStyle)
           .renderHtml(resultImage)
       }
-
       filter()
     </script>
   `
