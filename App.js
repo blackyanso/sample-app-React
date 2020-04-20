@@ -18,7 +18,7 @@ export default function HelloWorldApp() {
           <Link to="/">
             <Text>TopCamera</Text>
           </Link>
-          <Link to="/ChooseFilter">
+          <Link to="/ChooseFilter/base64SampleCode">
             <Text>ChooseFilter</Text>
           </Link>
           <Link to="/Gallery">
@@ -35,6 +35,7 @@ export default function HelloWorldApp() {
             path="/ChooseVideoFilter/:filePath"
             component={ChooseVideoFilter}
           />
+          <Route path="/ChooseFilter/:base64" component={ChooseFilter} />
           <Route path="/Gallery" component={Gallery} />
           <Route path="/GalleryPreview" component={GalleryPreview} />
         </View>

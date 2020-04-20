@@ -14,11 +14,14 @@ const TopCamera = props => {
     const options = {
       base64: true,
       width: 320,
-      height: 320
+      height: 320,
+      exif: false,
+      fixOrientation: true, // Android用
+      forceUpOrientation: true // iOS用
     }
     if (cameraRef && cameraRef.current) {
       const shotData = await cameraRef.current.takePictureAsync(options)
-      console.log('base64 log:', shotData.base64)
+      gotoFilter(shotData.base64)
     }
   }
 
@@ -53,6 +56,15 @@ const TopCamera = props => {
   const stopVideo = async () => {
     console.log('stop takeVideo')
     await cameraRef.current.stopRecording()
+  }
+
+  const gotoFilter = base64 => {
+    // Base64URL Encode
+    // https://ja.wikipedia.org/wiki/Base64
+    // https://akataworks.hatenadiary.jp/entry/2018/02/19/123524
+    const replaced = base64.replace(/\+/g, '-').replace(/\//g, '_')
+    console.log('go to filter from top camera')
+    props.history.push('/ChooseFilter/' + replaced)
   }
 
   return (
