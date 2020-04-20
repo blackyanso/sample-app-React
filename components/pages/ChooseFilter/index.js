@@ -4,9 +4,8 @@ import {StyleSheet, Switch, Text, View, Image, ScrollView} from 'react-native'
 import {WebView} from 'react-native-webview'
 import filterous from './filterous2.js'
 
-export default function({match}) {
-  const imageBase64 =
-    'data:image/jpeg;base64,' + decodeBase64(match.params.base64)
+export default function(props) {
+  const imageBase64 = 'data:image/jpeg;base64,' + props.location.state.base64
   const [imageData, setImageData] = useState(imageBase64)
   const [filter, setFilter] = useState('normal')
   const [toggleStatus, setToggleStatus] = useState(false)
@@ -45,11 +44,6 @@ export default function({match}) {
       filter()
     </script>
   `
-
-  function decodeBase64(base64) {
-    console.log('decodeBase64:')
-    return base64.replace(/-/g, '+').replace(/_/g, '/')
-  }
 
   function filtered(event) {
     const {data} = event.nativeEvent
