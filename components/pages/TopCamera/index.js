@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, {useRef, useState} from 'react'
-=======
-import React, {useRef} from 'react'
->>>>>>> master
 import {Button, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
