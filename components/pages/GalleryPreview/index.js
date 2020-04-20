@@ -5,8 +5,8 @@ import {Link} from 'react-router-native'
 export default function GalleryPreview(props) {
   const styles = StyleSheet.create({
     imagePreview: {
-      width: 330,
-      height: 330
+      width: '100%',
+      aspectRatio: 1
     },
     back: {
       color: '#ADD8E6',
@@ -15,7 +15,6 @@ export default function GalleryPreview(props) {
     }
   })
   const imageUrl = props.location.state.url
-  console.log(imageUrl)
 
   return (
     <View>
