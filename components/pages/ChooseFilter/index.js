@@ -22,7 +22,7 @@ export default function({match}) {
   })
 
   const html = /*html*/ `
-    <script src="./filterous2.min.js"></script>
+    <script src="https://cdn.rawgit.com/girliemac/filterous-2/1fc15582/demo-browser/filterous2.min.js"></script>
     <script>
       const baseData = '${imageBase64}'
 
