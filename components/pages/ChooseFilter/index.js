@@ -3,12 +3,9 @@ import React, {useState} from 'react'
 import {StyleSheet, Switch, Text, View, Image, ScrollView} from 'react-native'
 import {WebView} from 'react-native-webview'
 
-import sample64 from './sample64'
-
 export default function({match}) {
-  // const imageBase64 =
-  //   'data:image/jpeg;base64,' + decodeBase64(match.params.base64)
-  const imageBase64 = sample64
+  const imageBase64 =
+    'data:image/jpeg;base64,' + decodeBase64(match.params.base64)
   const [imageData, setImageData] = useState(imageBase64)
   const [filter, setFilter] = useState('normal')
   const [toggleStatus, setToggleStatus] = useState(false)
@@ -77,8 +74,7 @@ export default function({match}) {
       <View style={styles.wrap}>
         <WebView
           scalesPageToFit={false}
-          // source={{html}}
-          source={{uri: 'https://uki213.github.io/sample-app-Pwa/#/'}}
+          source={{html}}
           onMessage={filtered}
           mixedContentMode={'always'}
         />

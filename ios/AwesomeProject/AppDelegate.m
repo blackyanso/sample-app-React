@@ -28,7 +28,10 @@ static void InitializeFlipper(UIApplication *application) {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 #if DEBUG
-  InitializeFlipper(application);
+  // FIXME: imai React Native 0.6.22のバージョンではBase64のイメージを読み込むとCrashする問題がある
+  // 原因は内部で使用しているこのflipperにある。この処理はDebug時のみ使用しているようなのでひとまずコメントアウトでしのぐ。
+  // Issue: https://github.com/facebook/react-native/issues/28469
+//  InitializeFlipper(application);
 #endif
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
