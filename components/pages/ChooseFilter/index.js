@@ -105,6 +105,7 @@ export default function(props) {
       .get('https://uki213.github.io/sample-app-Pwa/api/upload.json')
       .then(result => {
         console.log(result.status, imageData)
+        props.history.replace('/Gallery')
       })
   }
 
