@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react'
-import {Button, StyleSheet, View} from 'react-native'
+import {TouchableOpacity, Text, Image, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
 
@@ -88,12 +88,14 @@ export default function TopCamera(props) {
           }}
           ratio="1:1"
         />
-        <TakePictureBtn action={takePicture} />
-        {isRecording ? (
-          <StopRecBtn action={stopVideo} />
-        ) : (
-          <StartRecBtn action={takeVideo} />
-        )}
+        <View style={styles.buttonArea}>
+          {isRecording ? (
+            <StopRecBtn action={stopVideo} />
+          ) : (
+            <StartRecBtn action={takeVideo} />
+          )}
+          <TakePictureBtn action={takePicture} />
+        </View>
       </View>
     </>
   )
@@ -101,24 +103,30 @@ export default function TopCamera(props) {
 
 function TakePictureBtn({action}) {
   return (
-    <View style={styles.marginVertical}>
-      <Button onPress={action} title="撮影" />
+    <View style={styles.shutterButton}>
+      <TouchableOpacity onPress={action}>
+        <Image source={require('./shutter.png')} />
+      </TouchableOpacity>
     </View>
   )
 }
 
 function StartRecBtn({action}) {
   return (
-    <View style={styles.marginVertical}>
-      <Button onPress={action} title="録画開始" />
+    <View style={styles.recordButton}>
+      <TouchableOpacity onPress={action}>
+        <Text style={styles.recordButtonStart}>録画開始</Text>
+      </TouchableOpacity>
     </View>
   )
 }
 
 function StopRecBtn({action}) {
   return (
-    <View style={styles.marginVertical}>
-      <Button onPress={action} title="録画終了" />
+    <View style={styles.recordButton}>
+      <TouchableOpacity onPress={action}>
+        <Text style={styles.recordButtonStop}>録画終了</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -131,14 +139,48 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 0
   },
-  marginVertical: {
-    marginTop: 10,
-    marginBottom: 10
-  },
   waringText: {
     fontSize: 24,
     fontWeight: '600',
     color: 'red'
+  },
+  buttonArea: {
+    marginTop: 40,
+    position: 'relative',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  shutterButton: {
+    alignContent: 'center'
+  },
+  recordButton: {
+    position: 'absolute',
+    right: 0
+  },
+  recordButtonStart: {
+    width: 40,
+    height: 40,
+    fontSize: 12,
+    lineHeight: 14,
+    backgroundColor: '#0c0',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    padding: 5,
+    borderRadius: 20,
+    color: '#fff'
+  },
+  recordButtonStop: {
+    width: 40,
+    height: 40,
+    fontSize: 12,
+    lineHeight: 14,
+    backgroundColor: '#c00',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    padding: 5,
+    borderRadius: 20,
+    color: '#fff'
   },
   cameraContainer: {
     zIndex: 0,
