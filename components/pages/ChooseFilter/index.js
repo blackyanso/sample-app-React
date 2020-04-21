@@ -1,8 +1,10 @@
 import 'react-native-get-random-values'
 import React, {useState} from 'react'
-import {StyleSheet, Switch, Text, View, Image, ScrollView} from 'react-native'
+import {StyleSheet, Switch, View, Image, ScrollView} from 'react-native'
 import {WebView} from 'react-native-webview'
 import filterous from './filterous2.js'
+
+import HistoryBack from '../../modules/HistoryBack'
 
 export default function(props) {
   const imageBase64 = 'data:image/jpeg;base64,' + props.location.state.base64
@@ -61,7 +63,7 @@ export default function(props) {
 
   return (
     <ScrollView>
-      <Text>ChooseFilter</Text>
+      <HistoryBack goBack={props.history.goBack} />
       <Image style={styles.image} source={{uri: imageData}} />
       <View>
         <Switch value={toggleStatus} onValueChange={changeToggle} />
