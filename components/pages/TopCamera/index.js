@@ -21,7 +21,7 @@ const TopCamera = props => {
     }
     if (cameraRef && cameraRef.current) {
       const shotData = await cameraRef.current.takePictureAsync(options)
-      console.log('base64 log:', shotData.base64)
+      // console.log('base64 log:', shotData.base64)
       gotoFilter(shotData.base64)
     }
   }
@@ -63,9 +63,11 @@ const TopCamera = props => {
     // Base64URL Encode
     // https://ja.wikipedia.org/wiki/Base64
     // https://akataworks.hatenadiary.jp/entry/2018/02/19/123524
-    const replaced = base64.replace(/\+/g, '-').replace(/\//g, '_')
     console.log('go to filter from top camera')
-    props.history.push('/ChooseFilter/' + replaced)
+    props.history.push({
+      pathname: '/ChooseFilter',
+      state: {base64}
+    })
   }
 
   return (
