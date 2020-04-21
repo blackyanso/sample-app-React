@@ -3,6 +3,8 @@ import {Button, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
 
+import Tab from '../../modules/Tab/Tab'
+
 export default function TopCamera(props) {
   const [isRecording, toggleRecording] = useState(false)
   const cameraRef = useRef(null)
@@ -70,27 +72,30 @@ export default function TopCamera(props) {
   }
 
   return (
-    <View style={styles.padding}>
-      <RNCamera
-        ref={cameraRef}
-        style={styles.cameraPreview}
-        type={RNCamera.Constants.Type.back}
-        flashMode={RNCamera.Constants.FlashMode.on}
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel'
-        }}
-        ratio="1:1"
-      />
-      <TakePictureBtn action={takePicture} />
-      {isRecording ? (
-        <StopRecBtn action={stopVideo} />
-      ) : (
-        <StartRecBtn action={takeVideo} />
-      )}
-    </View>
+    <>
+      <Tab history={props.history} />
+      <View style={styles.padding}>
+        <RNCamera
+          ref={cameraRef}
+          style={styles.cameraPreview}
+          type={RNCamera.Constants.Type.back}
+          flashMode={RNCamera.Constants.FlashMode.on}
+          androidCameraPermissionOptions={{
+            title: 'Permission to use camera',
+            message: 'We need your permission to use your camera',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel'
+          }}
+          ratio="1:1"
+        />
+        <TakePictureBtn action={takePicture} />
+        {isRecording ? (
+          <StopRecBtn action={stopVideo} />
+        ) : (
+          <StartRecBtn action={takeVideo} />
+        )}
+      </View>
+    </>
   )
 }
 
@@ -123,7 +128,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white
   },
   padding: {
-    padding: 20
+    padding: 20,
+    paddingTop: 0
   },
   marginVertical: {
     marginTop: 10,
