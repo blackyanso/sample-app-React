@@ -3,11 +3,11 @@ import {Button, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
 
-const TopCamera = props => {
+export default function TopCamera(props) {
   const [isRecording, toggleRecording] = useState(false)
   const cameraRef = useRef(null)
 
-  const takePicture = async () => {
+  async function takePicture() {
     // https://qiita.com/hazigin/items/900d196fef0d85570ca8
     // https://github.com/react-native-community/react-native-camera/blob/master/docs/RNCamera.md
     // https://qiita.com/arakappa/items/edd70ab9102a8566c145
@@ -21,12 +21,11 @@ const TopCamera = props => {
     }
     if (cameraRef && cameraRef.current) {
       const shotData = await cameraRef.current.takePictureAsync(options)
-      // console.log('base64 log:', shotData.base64)
       gotoFilter(shotData.base64)
     }
   }
 
-  const takeVideo = async () => {
+  async function takeVideo() {
     const options = {
       mute: false,
       maxDuration: 5,
@@ -54,12 +53,12 @@ const TopCamera = props => {
     }
   }
 
-  const stopVideo = async () => {
+  async function stopVideo() {
     console.log('stop takeVideo')
     await cameraRef.current.stopRecording()
   }
 
-  const gotoFilter = base64 => {
+  function gotoFilter(base64) {
     // Base64URL Encode
     // https://ja.wikipedia.org/wiki/Base64
     // https://akataworks.hatenadiary.jp/entry/2018/02/19/123524
@@ -95,7 +94,7 @@ const TopCamera = props => {
   )
 }
 
-const TakePictureBtn = ({action}) => {
+function TakePictureBtn({action}) {
   return (
     <View style={styles.marginVertical}>
       <Button onPress={action} title="撮影" />
@@ -103,7 +102,7 @@ const TakePictureBtn = ({action}) => {
   )
 }
 
-const StartRecBtn = ({action}) => {
+function StartRecBtn({action}) {
   return (
     <View style={styles.marginVertical}>
       <Button onPress={action} title="録画開始" />
@@ -111,7 +110,7 @@ const StartRecBtn = ({action}) => {
   )
 }
 
-const StopRecBtn = ({action}) => {
+function StopRecBtn({action}) {
   return (
     <View style={styles.marginVertical}>
       <Button onPress={action} title="録画終了" />
@@ -147,5 +146,3 @@ const styles = StyleSheet.create({
     aspectRatio: 1 // Androidではここでのプレビュー画面の比率の指定が効かない...
   }
 })
-
-export default TopCamera
