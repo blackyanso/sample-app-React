@@ -2,7 +2,7 @@ import React from 'react'
 import {Text, View, Button} from 'react-native'
 import {RNFFmpeg} from 'react-native-ffmpeg'
 
-import HistoryBack from '../../modules/HistoryBack'
+import HistoryBack from '../../modules/HistoryBack/HistoryBack'
 
 export default function ChooseVideoFilter({match, history}) {
   const inputFile = decodeURIComponent(match.params.filePath).replace(

@@ -4,7 +4,7 @@ import {StyleSheet, Switch, View, Image, ScrollView} from 'react-native'
 import {WebView} from 'react-native-webview'
 import filterous from './filterous2.js'
 
-import HistoryBack from '../../modules/HistoryBack'
+import HistoryBack from '../../modules/HistoryBack/HistoryBack'
 
 export default function(props) {
   const imageBase64 = 'data:image/jpeg;base64,' + props.location.state.base64

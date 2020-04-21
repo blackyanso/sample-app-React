@@ -1,7 +1,7 @@
 import React from 'react'
 import {View, Image, StyleSheet} from 'react-native'
 
-import HistoryBack from '../../modules/HistoryBack'
+import HistoryBack from '../../modules/HistoryBack/HistoryBack'
 
 export default function GalleryPreview(props) {
   const styles = StyleSheet.create({
