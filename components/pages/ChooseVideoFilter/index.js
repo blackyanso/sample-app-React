@@ -2,7 +2,9 @@ import React from 'react'
 import {Text, View, Button} from 'react-native'
 import {RNFFmpeg} from 'react-native-ffmpeg'
 
-export default function ChooseVideoFilter({match}) {
+import HistoryBack from '../../modules/HistoryBack/HistoryBack'
+
+export default function ChooseVideoFilter({match, history}) {
   const inputFile = decodeURIComponent(match.params.filePath).replace(
     /file:\/\//g,
     ''
@@ -20,7 +22,7 @@ export default function ChooseVideoFilter({match}) {
 
   return (
     <View>
-      <Text>Video Filter</Text>
+      <HistoryBack goBack={history.goBack} />
       <Text>{inputFile}</Text>
       <Button title="フィルター加工" onPress={() => onFilter()} />
     </View>

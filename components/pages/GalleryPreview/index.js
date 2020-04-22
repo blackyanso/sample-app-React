@@ -1,26 +1,20 @@
 import React from 'react'
-import {Text, View, Image, StyleSheet} from 'react-native'
-import {Link} from 'react-router-native'
+import {View, Image, StyleSheet} from 'react-native'
+
+import HistoryBack from '../../modules/HistoryBack/HistoryBack'
 
 export default function GalleryPreview(props) {
   const styles = StyleSheet.create({
     imagePreview: {
       width: '100%',
       aspectRatio: 1
-    },
-    back: {
-      color: '#ADD8E6',
-      fontSize: 20,
-      margin: 5
     }
   })
   const imageUrl = props.location.state.url
 
   return (
     <View>
-      <Link to={{pathname: '/Gallery'}}>
-        <Text style={styles.back}>◀</Text>
-      </Link>
+      <HistoryBack goBack={props.history.goBack} />
       <Image style={styles.imagePreview} source={{uri: imageUrl}} />
     </View>
   )

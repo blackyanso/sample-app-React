@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {Text, ScrollView, View, StyleSheet} from 'react-native'
+import {ScrollView, View, StyleSheet} from 'react-native'
 import axios from 'axios'
+
+import Tab from '../../modules/Tab/Tab'
 
 import GalleryItem from './GalleryItem'
 
-export default function Gallery() {
+export default function Gallery(props) {
   const [items, setItems] = useState([])
 
   async function init() {
@@ -19,7 +21,7 @@ export default function Gallery() {
 
   return (
     <>
-      <Text>Gallery</Text>
+      <Tab history={props.history} />
       <ScrollView>
         <View style={styles.gallery} accessible={true}>
           {items.map((item, index) => {

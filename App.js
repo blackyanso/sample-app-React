@@ -14,20 +14,6 @@ export default function HelloWorldApp() {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView />
       <NativeRouter>
-        <View style={styles.debug}>
-          <Link to="/">
-            <Text>TopCamera</Text>
-          </Link>
-          <Link to="/ChooseFilter">
-            <Text>ChooseFilter</Text>
-          </Link>
-          <Link to="/Gallery">
-            <Text>Gallery</Text>
-          </Link>
-          <Link to="/GalleryPreview">
-            <Text>GalleryPreview</Text>
-          </Link>
-        </View>
         <View style={styles.container}>
           <Route exact path="/" component={TopCamera} />
           <Route
@@ -51,6 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#fff',
     justifyContent: 'flex-start',
     alignItems: 'flex-start'
   }

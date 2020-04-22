@@ -1,7 +1,9 @@
 import React, {useRef, useState} from 'react'
-import {Button, StyleSheet, View} from 'react-native'
+import {TouchableOpacity, Text, Image, StyleSheet, View} from 'react-native'
 import {RNCamera} from 'react-native-camera'
 import {Colors} from 'react-native/Libraries/NewAppScreen'
+
+import Tab from '../../modules/Tab/Tab'
 
 export default function TopCamera(props) {
   const [isRecording, toggleRecording] = useState(false)
@@ -70,50 +72,62 @@ export default function TopCamera(props) {
   }
 
   return (
-    <View style={styles.padding}>
-      <RNCamera
-        ref={cameraRef}
-        style={styles.cameraPreview}
-        type={RNCamera.Constants.Type.back}
-        flashMode={RNCamera.Constants.FlashMode.on}
-        androidCameraPermissionOptions={{
-          title: 'Permission to use camera',
-          message: 'We need your permission to use your camera',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel'
-        }}
-        ratio="1:1"
-      />
-      <TakePictureBtn action={takePicture} />
-      {isRecording ? (
-        <StopRecBtn action={stopVideo} />
-      ) : (
-        <StartRecBtn action={takeVideo} />
-      )}
-    </View>
+    <>
+      <Tab history={props.history} />
+      <View style={styles.padding}>
+        <View style={styles.cameraWrap}>
+          <RNCamera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            type={RNCamera.Constants.Type.back}
+            flashMode={RNCamera.Constants.FlashMode.on}
+            androidCameraPermissionOptions={{
+              title: 'Permission to use camera',
+              message: 'We need your permission to use your camera',
+              buttonPositive: 'Ok',
+              buttonNegative: 'Cancel'
+            }}
+          />
+        </View>
+        <View style={styles.buttonArea}>
+          {isRecording ? (
+            <StopRecBtn action={stopVideo} />
+          ) : (
+            <StartRecBtn action={takeVideo} />
+          )}
+          <TakePictureBtn action={takePicture} />
+        </View>
+      </View>
+    </>
   )
 }
 
 function TakePictureBtn({action}) {
   return (
-    <View style={styles.marginVertical}>
-      <Button onPress={action} title="撮影" />
+    <View style={styles.shutterButton}>
+      <TouchableOpacity onPress={action}>
+        <Image source={require('./shutter.png')} />
+      </TouchableOpacity>
     </View>
   )
 }
 
 function StartRecBtn({action}) {
   return (
-    <View style={styles.marginVertical}>
-      <Button onPress={action} title="録画開始" />
+    <View style={styles.recordButton}>
+      <TouchableOpacity onPress={action}>
+        <Text style={styles.recordButtonStart}>録画開始</Text>
+      </TouchableOpacity>
     </View>
   )
 }
 
 function StopRecBtn({action}) {
   return (
-    <View style={styles.marginVertical}>
-      <Button onPress={action} title="録画終了" />
+    <View style={styles.recordButton}>
+      <TouchableOpacity onPress={action}>
+        <Text style={styles.recordButtonStop}>録画終了</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -123,22 +137,64 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white
   },
   padding: {
-    padding: 20
-  },
-  marginVertical: {
-    marginTop: 10,
-    marginBottom: 10
+    padding: 20,
+    paddingTop: 0
   },
   waringText: {
     fontSize: 24,
     fontWeight: '600',
     color: 'red'
   },
+  buttonArea: {
+    marginTop: 40,
+    position: 'relative',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  shutterButton: {
+    alignContent: 'center'
+  },
+  recordButton: {
+    position: 'absolute',
+    right: 0
+  },
+  recordButtonStart: {
+    width: 40,
+    height: 40,
+    fontSize: 12,
+    lineHeight: 14,
+    backgroundColor: '#0c0',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    padding: 5,
+    borderRadius: 20,
+    color: '#fff'
+  },
+  recordButtonStop: {
+    width: 40,
+    height: 40,
+    fontSize: 12,
+    lineHeight: 14,
+    backgroundColor: '#c00',
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    padding: 5,
+    borderRadius: 20,
+    color: '#fff'
+  },
   cameraContainer: {
     zIndex: 0,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  cameraWrap: {
+    width: '100%',
+    aspectRatio: 1,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#707070'
   },
   cameraPreview: {
     zIndex: 0,
