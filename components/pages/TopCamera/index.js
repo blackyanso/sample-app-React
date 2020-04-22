@@ -75,19 +75,20 @@ export default function TopCamera(props) {
     <>
       <Tab history={props.history} />
       <View style={styles.padding}>
-        <RNCamera
-          ref={cameraRef}
-          style={styles.cameraPreview}
-          type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
-          androidCameraPermissionOptions={{
-            title: 'Permission to use camera',
-            message: 'We need your permission to use your camera',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel'
-          }}
-          ratio="1:1"
-        />
+        <View style={styles.cameraWrap}>
+          <RNCamera
+            ref={cameraRef}
+            style={styles.cameraPreview}
+            type={RNCamera.Constants.Type.back}
+            flashMode={RNCamera.Constants.FlashMode.on}
+            androidCameraPermissionOptions={{
+              title: 'Permission to use camera',
+              message: 'We need your permission to use your camera',
+              buttonPositive: 'Ok',
+              buttonNegative: 'Cancel'
+            }}
+          />
+        </View>
         <View style={styles.buttonArea}>
           {isRecording ? (
             <StopRecBtn action={stopVideo} />
@@ -187,6 +188,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  cameraWrap: {
+    width: '100%',
+    aspectRatio: 1,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#707070'
   },
   cameraPreview: {
     zIndex: 0,
