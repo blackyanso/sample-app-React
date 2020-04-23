@@ -71,16 +71,19 @@ export default function(props) {
         const filterStyle = '${filter}'
         const resultImage = new Image()
         const baseImage = new Image()
-        baseImage.src = baseData
 
         resultImage.onload = () => {
           window.ReactNativeWebView.postMessage(resultImage.src)
         }
 
-        filterous
-          .importImage(baseImage)
-          .applyInstaFilter(filterStyle)
-          .renderHtml(resultImage)
+        baseImage.onload = ()=>{
+          filterous
+            .importImage(baseImage)
+            .applyInstaFilter(filterStyle)
+            .renderHtml(resultImage)
+        }
+
+        baseImage.src = baseData
       }
       filter()
     </script>
